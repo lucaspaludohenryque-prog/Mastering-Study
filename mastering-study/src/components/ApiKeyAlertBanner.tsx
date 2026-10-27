@@ -1,18 +1,20 @@
 "use client";
 
-import React from "react";
+import Link from "next/link";
 import { AlertTriangle, KeyRound, CheckCircle2, ArrowRight } from "lucide-react";
 
 interface ApiKeyAlertBannerProps {
   isConnected?: boolean;
   providerName?: string;
-  onConfigureClick: () => void;
+  onConfigureClick?: () => void;
+  configHref?: string;
 }
 
 export function ApiKeyAlertBanner({
   isConnected = false,
   providerName = "Google Gemini",
   onConfigureClick,
+  configHref = "/configuracoes-ia",
 }: ApiKeyAlertBannerProps) {
   if (isConnected) {
     return (
@@ -34,14 +36,24 @@ export function ApiKeyAlertBanner({
           </div>
         </div>
 
-        <button
-          type="button"
-          onClick={onConfigureClick}
-          className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-semibold text-emerald-800 border border-emerald-200 shadow-2xs hover:bg-emerald-100/60 transition-colors cursor-pointer"
-        >
-          <span>Gerenciar Chave</span>
-          <ArrowRight className="h-3.5 w-3.5" />
-        </button>
+        {onConfigureClick ? (
+          <button
+            type="button"
+            onClick={onConfigureClick}
+            className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-semibold text-emerald-800 border border-emerald-200 shadow-2xs hover:bg-emerald-100/60 transition-colors cursor-pointer"
+          >
+            <span>Gerenciar Chave</span>
+            <ArrowRight className="h-3.5 w-3.5" />
+          </button>
+        ) : (
+          <Link
+            href={configHref}
+            className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-xs font-semibold text-emerald-800 border border-emerald-200 shadow-2xs hover:bg-emerald-100/60 transition-colors cursor-pointer"
+          >
+            <span>Gerenciar Chave</span>
+            <ArrowRight className="h-3.5 w-3.5" />
+          </Link>
+        )}
       </div>
     );
   }
@@ -65,15 +77,26 @@ export function ApiKeyAlertBanner({
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={onConfigureClick}
-        className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-amber-600 px-5 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-amber-700 active:scale-98 transition-all cursor-pointer"
-      >
-        <KeyRound className="h-4 w-4" />
-        <span>Configurar Chave</span>
-        <ArrowRight className="h-3.5 w-3.5" />
-      </button>
+      {onConfigureClick ? (
+        <button
+          type="button"
+          onClick={onConfigureClick}
+          className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-amber-600 px-5 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-amber-700 active:scale-98 transition-all cursor-pointer"
+        >
+          <KeyRound className="h-4 w-4" />
+          <span>Configurar Chave</span>
+          <ArrowRight className="h-3.5 w-3.5" />
+        </button>
+      ) : (
+        <Link
+          href={configHref}
+          className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-amber-600 px-5 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-amber-700 active:scale-98 transition-all cursor-pointer"
+        >
+          <KeyRound className="h-4 w-4" />
+          <span>Configurar Chave</span>
+          <ArrowRight className="h-3.5 w-3.5" />
+        </Link>
+      )}
     </div>
   );
 }

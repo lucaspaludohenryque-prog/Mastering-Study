@@ -49,10 +49,9 @@ const navItems: NavItem[] = [
   {
     id: "config-ia",
     title: "Configurações de IA",
-    href: "#configuracoes-ia",
+    href: "/configuracoes-ia",
     icon: Sparkles,
     badge: "BYOK",
-    isAiAction: true,
   },
 ];
 
